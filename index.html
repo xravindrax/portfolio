@@ -378,30 +378,42 @@
   /* ============ Featured projects ============ */
   /* ============ Featured projects — auto-sliding ticker ============ */
   .projects-ticker {
+    position: relative;
     overflow: hidden;
     margin-bottom: 48px;
   }
   .ticker-track {
     display: flex;
     width: max-content;
-    animation: ticker-scroll 40s linear infinite;
-  }
-  .projects-ticker:hover .ticker-track,
-  .projects-ticker:focus-within .ticker-track {
-    animation-play-state: paused;
+    will-change: transform;
   }
   .ticker-track .blog-card {
     width: 360px;
     flex: none;
     margin-right: 40px;
   }
-  @keyframes ticker-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  .ticker-arrow {
+    position: absolute;
+    top: 120px;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--v-divider);
+    background-color: var(--nav-bg);
+    color: var(--menu-btn-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s, transform 0.3s;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .ticker-track { animation: none; }
-  }
+  .ticker-arrow:hover { background-color: var(--mint-cream); transform: translateY(-50%) scale(1.08); }
+  .ticker-arrow svg { width: 18px; height: 18px; display: block; }
+  .ticker-arrow.left { left: 8px; }
+  .ticker-arrow.right { right: 8px; }
   .blog-card { color: #1c2122; text-decoration: none; display: block; }
   .blog-thumb {
     background-color: var(--line);
@@ -664,6 +676,7 @@
 
     .experience-grid { grid-template-columns: 1fr; }
     .ticker-track .blog-card { width: 280px; margin-right: 24px; }
+    .ticker-arrow { top: 110px; width: 38px; height: 38px; }
     .edu-grid { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
 
@@ -824,6 +837,12 @@
       </div>
 
       <div class="projects-ticker" aria-label="Featured projects">
+        <button class="ticker-arrow left" id="tickerLeft" aria-label="Scroll projects left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="ticker-arrow right" id="tickerRight" aria-label="Scroll projects right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
         <div class="ticker-track">
         <!-- Card 1 -->
         <a href="#" class="blog-card">
@@ -1129,6 +1148,62 @@
         try { localStorage.setItem("theme", "dark"); } catch (e) {}
       }
     });
+
+    /* Projects ticker: auto-slide + arrow controls */
+    (function () {
+      var viewport = document.querySelector(".projects-ticker");
+      var track = document.querySelector(".ticker-track");
+      if (!viewport || !track) return;
+      var card = track.querySelector(".blog-card");
+      var setWidth = 0;
+      var step = 0;
+      var pos = 0;
+      var anim = null;
+      var paused = false;
+      var speed = 30; /* pixels per second */
+      var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var last = null;
+
+      function measure() {
+        setWidth = track.scrollWidth / 2;
+        step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(card).marginRight || "0");
+      }
+      measure();
+      window.addEventListener("resize", measure);
+
+      function wrap(v) {
+        return ((v % setWidth) + setWidth) % setWidth;
+      }
+
+      function nudge(dir) {
+        anim = { from: pos, to: pos + dir * step, start: performance.now(), dur: 450 };
+      }
+      document.getElementById("tickerLeft").addEventListener("click", function () { nudge(-1); });
+      document.getElementById("tickerRight").addEventListener("click", function () { nudge(1); });
+
+      viewport.addEventListener("mouseenter", function () { paused = true; });
+      viewport.addEventListener("mouseleave", function () { paused = false; });
+      viewport.addEventListener("focusin", function () { paused = true; });
+      viewport.addEventListener("focusout", function () { paused = false; });
+
+      function frame(t) {
+        if (last == null) last = t;
+        var dt = Math.min(0.1, (t - last) / 1000);
+        last = t;
+        if (anim) {
+          var u = Math.min(1, (t - anim.start) / anim.dur);
+          var ease = 1 - Math.pow(1 - u, 3);
+          pos = anim.from + (anim.to - anim.from) * ease;
+          if (u >= 1) { pos = anim.to; anim = null; }
+        } else if (!paused && !reduce) {
+          pos += speed * dt;
+        }
+        pos = wrap(pos);
+        track.style.transform = "translateX(" + (-pos) + "px)";
+        requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    })();
   </script>
 </body>
 </html>
