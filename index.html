@@ -279,7 +279,8 @@
     color: var(--dark-olive-green);
     transform: rotate(-2deg);
   }
-  .hero-intro { max-width: 560px; }
+  .hero-grid > div:first-child { grid-column: 1 / -1; }
+  .hero-intro { max-width: 560px; grid-column: 1 / -1; justify-self: center; }
   .hero-intro p {
     color: var(--darker-grey);
     margin: 0;
