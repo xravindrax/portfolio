@@ -306,12 +306,31 @@
   .cta-card .date { margin-top: 18px; font-size: 13px; font-weight: 400; }
 
   /* ============ Featured projects ============ */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: start;
+  /* ============ Featured projects — auto-sliding ticker ============ */
+  .projects-ticker {
+    overflow: hidden;
     margin-bottom: 48px;
+  }
+  .ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker-scroll 40s linear infinite;
+  }
+  .projects-ticker:hover .ticker-track,
+  .projects-ticker:focus-within .ticker-track {
+    animation-play-state: paused;
+  }
+  .ticker-track .blog-card {
+    width: 360px;
+    flex: none;
+    margin-right: 40px;
+  }
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track { animation: none; }
   }
   .blog-card { color: #1c2122; text-decoration: none; display: block; }
   .blog-thumb {
@@ -561,7 +580,7 @@
     .title-line { width: 100%; }
 
     .experience-grid { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .ticker-track .blog-card { width: 280px; margin-right: 24px; }
     .edu-grid { grid-template-columns: 1fr; }
     .skills-grid { grid-template-columns: 1fr; }
 
@@ -717,7 +736,8 @@
         <span>BUILD PROJECTS</span>
       </div>
 
-      <div class="projects-grid">
+      <div class="projects-ticker" aria-label="Featured projects">
+        <div class="ticker-track">
         <!-- Card 1 -->
         <a href="#" class="blog-card">
           <div class="blog-thumb">
@@ -795,7 +815,81 @@
             </div>
           </div>
         </a>
-      </div>
+
+        <!-- Duplicated set for seamless infinite scroll (hidden from assistive tech) -->
+        <a href="#" class="blog-card" aria-hidden="true" tabindex="-1">
+          <div class="blog-thumb">
+            <div class="thumb-ph thumb-ph-1">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.7 15.9L4.8 12L8.7 8.1L7.3 6.7L2 12L7.3 17.3L8.7 15.9ZM15.3 15.9L19.2 12L15.3 8.1L16.7 6.7L22 12L16.7 17.3L15.3 15.9Z" fill="#44624a"/>
+              </svg>
+              <div class="thumb-ph-label">Django &middot; Python</div>
+            </div>
+          </div>
+          <div class="blog-title">Django-based <span class="hash-green">Static Site Generator</span></div>
+          <div class="blog-card-content">
+            <div class="blog-line"></div>
+            <div class="blog-meta">
+              <div class="tag-list">
+                <span class="tag">Python</span>
+                <span class="tag">Django</span>
+                <span class="tag">Web Development</span>
+              </div>
+              <div class="blog-date-wrap">
+                <div class="blog-date">2022</div>
+                <div class="dot">•</div>
+                <div class="blog-time">Solo project</div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="blog-card" aria-hidden="true" tabindex="-1">
+          <div class="blog-thumb">
+            <div class="thumb-ph thumb-ph-2">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17C6 19.21 7.79 21 10 21C12.21 21 14 19.21 14 17V7H18V3H12Z" fill="#3d5a80"/>
+              </svg>
+              <div class="thumb-ph-label">Group Project</div>
+            </div>
+          </div>
+          <div class="blog-title">Spotify Clone — a music streaming web app</div>
+          <div class="blog-card-content">
+            <div class="blog-line"></div>
+            <div class="blog-meta">
+              <div class="tag-list">
+                <span class="tag">Web Development</span>
+                <span class="tag">UI</span>
+                <span class="tag">Team Project</span>
+              </div>
+              <div class="blog-date-wrap">
+                <div class="blog-date">Group project</div>
+              </div>
+            </div>
+          </div>
+        </a>
+        <a href="#contact" class="blog-card" aria-hidden="true" tabindex="-1">
+          <div class="blog-thumb">
+            <div class="thumb-ph thumb-ph-3">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.0001 17.5195L16.1501 20.0295C16.9101 20.4895 17.8401 19.8095 17.6401 18.9495L16.5401 14.2295L20.2101 11.0495C20.8801 10.4695 20.5201 9.36952 19.6401 9.29952L14.8101 8.88952L12.9201 4.42952C12.5801 3.61952 11.4201 3.61952 11.0801 4.42952L9.19007 8.87952L4.36007 9.28952C3.48007 9.35952 3.12007 10.4595 3.79007 11.0395L7.46007 14.2195L6.36007 18.9395C6.16007 19.7995 7.09007 20.4795 7.85007 20.0195L12.0001 17.5195Z" fill="#8ba888"/>
+              </svg>
+              <div class="thumb-ph-label">In the works</div>
+            </div>
+          </div>
+          <div class="blog-category">COMING SOON</div>
+          <div class="blog-title">New projects brewing — IT support &amp; Django experiments</div>
+          <div class="blog-card-content">
+            <div class="blog-line"></div>
+            <div class="blog-meta">
+              <div class="tag-list">
+                <span class="tag">Python</span>
+                <span class="tag">IT Support</span>
+                <span class="tag">Figma</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div></div>
 
       <div class="detail-label" style="margin-bottom:24px;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:7px;">
