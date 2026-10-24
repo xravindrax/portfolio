@@ -8,7 +8,7 @@
   (function () {
     var saved = null;
     try { saved = localStorage.getItem("theme"); } catch (e) {}
-    if (saved === "dark" || (!saved && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+    if (saved !== "light") {
       document.documentElement.setAttribute("data-theme", "dark");
     }
   })();
