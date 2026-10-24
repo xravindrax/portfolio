@@ -279,7 +279,11 @@
     color: var(--dark-olive-green);
     transform: rotate(-2deg);
   }
-  .hero-intro { max-width: 560px; }
+  .hero-intro {
+    max-width: 620px;
+    border-left: 1px solid var(--v-divider);
+    padding-left: 56px;
+  }
   .hero-intro p {
     color: var(--darker-grey);
     margin: 0;
@@ -666,6 +670,7 @@
 
     .hero-section { padding-top: 72px; padding-bottom: 72px; }
     .hero-grid { grid-template-columns: 1fr; }
+    .hero-intro { border-left: none; padding-left: 0; }
     .hero-heading-wrap { flex-direction: column; }
     .hero-heading { padding-right: 0; font-size: 40px; }
     .hero-name { font-size: 64px; }
