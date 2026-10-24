@@ -577,7 +577,11 @@
     margin-top: 24px;
     font-size: 15px;
     color: var(--meta-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
+  .location-icon { width: 15px; height: 15px; display: block; flex: none; }
 
   /* ============ Footer ============ */
   .footer { padding: 32px 5%; position: relative; }
@@ -1107,7 +1111,10 @@
           <a href="mailto:ravindra.geeks@gmail.com" class="contact-btn contact-btn-primary">ravindra.geeks@gmail.com</a>
           <a href="tel:+917708807748" class="contact-btn contact-btn-secondary">+91 7708807748</a>
         </div>
-        <div class="contact-location">Sector 18, Lucknow, Uttar Pradesh, 226029</div>
+        <div class="contact-location">
+          <svg class="location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          New Delhi, Lucknow
+        </div>
       </div>
     </div>
   </section>
