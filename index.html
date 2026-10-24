@@ -377,6 +377,7 @@
 
   /* ============ Featured projects ============ */
   /* ============ Featured projects — auto-sliding ticker ============ */
+  .projects-wrap { position: relative; }
   .projects-ticker {
     position: relative;
     overflow: hidden;
@@ -412,8 +413,8 @@
   }
   .ticker-arrow:hover { background-color: var(--mint-cream); transform: translateY(-50%) scale(1.08); }
   .ticker-arrow svg { width: 18px; height: 18px; display: block; }
-  .ticker-arrow.left { left: 8px; }
-  .ticker-arrow.right { right: 8px; }
+  .ticker-arrow.left { left: -20px; }
+  .ticker-arrow.right { right: -20px; }
   .blog-card { color: #1c2122; text-decoration: none; display: block; }
   .blog-thumb {
     background-color: var(--line);
@@ -836,14 +837,9 @@
         <span>BUILD PROJECTS</span>
       </div>
 
-      <div class="projects-ticker" aria-label="Featured projects">
-        <button class="ticker-arrow left" id="tickerLeft" aria-label="Scroll projects left">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <button class="ticker-arrow right" id="tickerRight" aria-label="Scroll projects right">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
-        <div class="ticker-track">
+      <div class="projects-wrap">
+        <div class="projects-ticker" aria-label="Featured projects">
+          <div class="ticker-track">
         <!-- Card 1 -->
         <a href="#" class="blog-card">
           <div class="blog-thumb">
@@ -995,7 +991,14 @@
             </div>
           </div>
         </a>
-      </div></div>
+        </div>
+        <button class="ticker-arrow left" id="tickerLeft" aria-label="Scroll projects left">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="ticker-arrow right" id="tickerRight" aria-label="Scroll projects right">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
 
       <div class="detail-label" style="margin-bottom:24px;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right:7px;">
