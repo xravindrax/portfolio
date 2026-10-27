@@ -190,6 +190,8 @@ img, video, object, embed, iframe { max-width: 100%; height: auto; display: bloc
 .skill-chip:nth-child(7n) { animation-delay: 2.7s; }
 .skill-list:hover .skill-chip { animation-play-state: paused; }
 .skill-chip:hover { animation-play-state: paused; border-color: var(--accent); background: #dcebe2; color: var(--accent); transform: translateY(-3px); }
+.skill-chip.rainbow { color: transparent; -webkit-text-fill-color: transparent; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff); background-clip: text; -webkit-background-clip: text; border-color: var(--accent); }
+.skill-chip.rainbow:hover { background: #dcebe2; border-color: var(--accent); color: transparent; -webkit-text-fill-color: transparent; background-clip: text; -webkit-background-clip: text; transform: translateY(-3px); }
 @keyframes chip-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
@@ -499,7 +501,7 @@ html, body { overflow-x: hidden; }
       <span class="skill-chip">Django</span>
       <span class="skill-chip">MS Office</span>
       <span class="skill-chip">MS Windows</span>
-      <span class="skill-chip">Figma</span>
+      <span class="skill-chip rainbow">Figma</span>
       <span class="skill-chip">Adobe Photoshop</span>
       <span class="skill-chip">Social Media</span>
       <span class="skill-chip">Time Management</span>
