@@ -208,6 +208,9 @@ img, video, object, embed, iframe { max-width: 100%; height: auto; display: bloc
 .big-mail { display: inline-block; margin-top: 44px; font-size: clamp(20px, 3.4vw, 38px); font-weight: 600; letter-spacing: -0.02em; text-decoration: none; position: relative; padding-bottom: 6px; }
 .big-mail::after { content: ""; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.22,1,.36,1); }
 .big-mail:hover::after { transform: scaleX(1); }
+.copy-btn { margin-left: 16px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; background: none; border: 1px solid var(--line); border-radius: 6px; color: var(--meta); padding: 4px 10px; cursor: pointer; transition: all .2s; vertical-align: middle; }
+.copy-btn:hover { border-color: var(--ink); color: var(--ink); background: var(--hover); }
+.copy-icon { margin-left: 6px; font-size: 12px; }
 .contact-row { display: flex; flex-wrap: wrap; gap: 28px; margin-top: 28px; font-family: var(--mono); font-size: 15px; color: var(--meta); }
 .contact-row a { color: var(--ink); text-decoration: none; }
 .contact-row a:hover { color: var(--accent); text-decoration: underline; }
@@ -531,6 +534,7 @@ html, body { overflow-x: hidden; }
     <div class="sect-label"><span class="num">05</span> Contact <span class="rule"></span></div>
     <h2 class="mega2">Let&rsquo;s work together<span class="dot">.</span></h2>
     <a class="big-mail" href="mailto:ravindra.geeks@gmail.com">ravindra.geeks@gmail.com</a>
+    <button class="copy-btn" onclick="copyEmail('ravindra.geeks@gmail.com', this)">Copy <span class="copy-icon">📋</span></button>
     <div class="contact-row">
       <span class="loc">New Delhi, Lucknow, IN</span>
       <a href="tel:+917708807748">+91 77088 07748</a>
@@ -573,6 +577,13 @@ function playPop() {
     osc.start(now);
     osc.stop(now + 0.1);
   } catch (e) {}
+}
+function copyEmail(email, btn) {
+  navigator.clipboard.writeText(email).then(function () {
+    var originalHTML = btn.innerHTML;
+    btn.innerHTML = 'Copied ✓';
+    setTimeout(function () { btn.innerHTML = originalHTML; }, 2000);
+  });
 }
 (function () {
   var links = document.getElementById("navLinks");
