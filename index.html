@@ -140,7 +140,7 @@ img, video, object, embed, iframe { max-width: 100%; height: auto; display: bloc
 .x-row:hover .x-arrow { transform: translate(3px, -3px); color: var(--ink); }
 
 /* -------- project cards -------- */
-.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.grid3 { display: grid; grid-template-columns: 1fr; gap: 18px; }
 .pcard { border: 1px solid var(--line); padding: 30px 26px 26px; min-height: 330px; display: flex; flex-direction: column; text-decoration: none; transition: border-color .25s, transform .25s, background .25s; position: relative; }
 .pcard:hover { border-color: var(--ink); transform: translateY(-4px); background: #fcfcfa; }
 [data-theme="dark"] .pcard:hover { background: #181c18; }
@@ -210,7 +210,7 @@ html, body { overflow-x: hidden; }
   .wrap { padding: 0 18px; }
   .hero-foot { grid-template-columns: 1fr; gap: 30px; }
   .status { max-width: 330px; }
-  .grid3 { grid-template-columns: 1fr 1fr; }
+  .grid3 { grid-template-columns: 1fr; }
   .grid2 { gap: 40px; }
   .x-row { grid-template-columns: 100px 1fr auto; }
   .x-note { display: none; }
