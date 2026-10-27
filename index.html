@@ -7,17 +7,11 @@
 <script>
 (function () {
   var root = document.documentElement;
-  var t = null;
-  try { t = localStorage.getItem("folio-theme"); } catch (e) {}
-  if (!t) {
-    root.setAttribute("data-theme", "light");
-    setTimeout(function () {
-      root.setAttribute("data-theme", "dark");
-      try { localStorage.setItem("folio-theme", "dark"); } catch (e) {}
-    }, 3000);
-  } else {
-    root.setAttribute("data-theme", t);
-  }
+  root.setAttribute("data-theme", "light");
+  setTimeout(function () {
+    root.setAttribute("data-theme", "dark");
+    try { localStorage.setItem("folio-theme", "dark"); } catch (e) {}
+  }, 3000);
 })();
 </script>
 <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='20' fill='%23111111'/&gt;&lt;text x='50' y='70' font-size='46' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'&gt;R.&lt;/text&gt;&lt;/svg&gt;"/>
