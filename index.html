@@ -553,6 +553,25 @@ html, body { overflow-x: hidden; }
 
 <script>
 history.scrollRestoration = 'manual';
+function playPop() {
+  try {
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    var ctx = new AudioContext();
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    var now = ctx.currentTime;
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(150, now);
+    osc.frequency.exponentialRampToValueAtTime(30, now + 0.1);
+    gain.gain.setValueAtTime(0.3, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+    osc.start(now);
+    osc.stop(now + 0.1);
+  } catch (e) {}
+}
 (function () {
   var links = document.getElementById("navLinks");
   document.getElementById("menuBtn").addEventListener("click", function () {
@@ -560,6 +579,7 @@ history.scrollRestoration = 'manual';
   });
   /* dark mode toggle */
   document.getElementById("themeToggle").addEventListener("click", function () {
+    playPop();
     var root = document.documentElement;
     var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", next);
