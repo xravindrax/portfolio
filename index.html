@@ -560,18 +560,25 @@ function playPop() {
     var AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
     var ctx = new AudioContext();
-    var osc = ctx.createOscillator();
+    var osc1 = ctx.createOscillator();
+    var osc2 = ctx.createOscillator();
     var gain = ctx.createGain();
-    osc.connect(gain);
+    osc1.connect(gain);
+    osc2.connect(gain);
     gain.connect(ctx.destination);
     var now = ctx.currentTime;
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(200, now);
-    osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
-    gain.gain.setValueAtTime(0.6, now);
-    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
-    osc.start(now);
-    osc.stop(now + 0.1);
+    osc1.type = "sine";
+    osc2.type = "square";
+    osc1.frequency.setValueAtTime(250, now);
+    osc1.frequency.exponentialRampToValueAtTime(60, now + 0.12);
+    osc2.frequency.setValueAtTime(400, now);
+    osc2.frequency.exponentialRampToValueAtTime(80, now + 0.12);
+    gain.gain.setValueAtTime(1.0, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    osc1.start(now);
+    osc2.start(now);
+    osc1.stop(now + 0.12);
+    osc2.stop(now + 0.12);
   } catch (e) {}
 }
 (function () {
