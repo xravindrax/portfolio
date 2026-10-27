@@ -576,6 +576,13 @@ history.scrollRestoration = 'manual';
     els.forEach(function (el) { el.classList.add("in"); });
   }
 })();
+(function () {
+  var list = document.querySelector(".skill-list");
+  if (!list) return;
+  var chips = Array.from(list.querySelectorAll(".skill-chip"));
+  chips.sort(function () { return Math.random() - 0.5; });
+  chips.forEach(function (chip) { list.appendChild(chip); });
+})();
 </script>
 </body>
 </html>
