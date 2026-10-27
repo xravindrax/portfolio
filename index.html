@@ -566,9 +566,9 @@ function playPop() {
     gain.connect(ctx.destination);
     var now = ctx.currentTime;
     osc.type = "sine";
-    osc.frequency.setValueAtTime(150, now);
-    osc.frequency.exponentialRampToValueAtTime(30, now + 0.1);
-    gain.gain.setValueAtTime(0.3, now);
+    osc.frequency.setValueAtTime(200, now);
+    osc.frequency.exponentialRampToValueAtTime(50, now + 0.1);
+    gain.gain.setValueAtTime(0.6, now);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
     osc.start(now);
     osc.stop(now + 0.1);
